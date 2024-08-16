@@ -5,20 +5,20 @@ from django.contrib.auth.models import User
 from django.views.generic import DetailView
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import permission_required
 from .models import Book, Library
-from .forms import UserRegistrationForm, BookForm
+from .forms import BookForm
 
 # Create your views here.
 def book_list(request):
     books = Book.objects.all()
-    response = "\n".join([f"Title: {book.title}, Author: {book.author}" for book in books])
-    
-    return HttpResponse(response, content_type="text/plain")
+
+    return render(request, 'relationship_app/list_books.html', {'books':books})
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'templates/relationship_app/library_detail.html'
+    template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -28,12 +28,12 @@ class LibraryDetailView(DetailView):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = UserCreationForm(request, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')  # Redirect or return an HttpResponse after saving
     else:
-        form = UserRegistrationForm()
+        form = UserCreationForm()
 
     return render(request, 'relationship_app/register.html', {'form': form})
 
