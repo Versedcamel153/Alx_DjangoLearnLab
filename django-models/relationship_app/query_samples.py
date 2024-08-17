@@ -1,4 +1,4 @@
-from relationship_app.models import Book, Library, Author
+from relationship_app.models import Book, Library, Author, Librarian
 
 
 # Query all books by a specific author
@@ -16,3 +16,5 @@ books.all()
 # Retrieve the librarian for a specific library
 library = Library.objects.get(Library=library_name)
 Library.objects.get(name=library_name)
+
+librarian = Librarian.objects.get(library='Central Library')
