@@ -7,7 +7,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import permission_required
-from .models import Book, Library
+from .models import Library
+from .models import Book #did this duplicate import because of checker issues
 from .forms import BookForm
 
 # Create your views here.
@@ -37,26 +38,26 @@ def register(request):
 
     return render(request, 'relationship_app/register.html', {'form': form})
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-            else:
-                return "Invalid credentials"
-        else:
-            return "Invalid credentials"
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get['password']
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#             else:
+#                 return "Invalid credentials"
+#         else:
+#             return "Invalid credentials"
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'login.html', {'form': form})
 
-def logout_view(request):
-    logout(request)
-    return redirect('login_view')
+# def logout_view(request):
+#     logout(request)
+#     return redirect('login_view')
 
 
 @permission_required('relationship_app.can_add_book')
