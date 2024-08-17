@@ -15,3 +15,4 @@ books.all()
 
 # Retrieve the librarian for a specific library
 library = Library.objects.get(Library=library_name)
+Library.objects.get(name=library_name)

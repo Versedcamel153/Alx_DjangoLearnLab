@@ -1,10 +1,7 @@
 from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 from django.views.generic.detail import DetailView
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import permission_required
 from .models import Library
@@ -12,7 +9,7 @@ from .models import Book #did this duplicate import because of checker issues
 from .forms import BookForm
 
 # Create your views here.
-def book_list(request):
+def list_books(request):
     books = Book.objects.all()
 
     return render(request, 'relationship_app/list_books.html', {'books':books})
