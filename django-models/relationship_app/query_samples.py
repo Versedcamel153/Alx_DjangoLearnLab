@@ -9,8 +9,8 @@ books_by_author = Book.objects.filter(author=author)
 # List all books in a specific library
 library_name = "Central Library"  # Replace with the actual library name
 
-books = Book()
-books.objects.all()
+books = Book.objects.all()
+books.all()
 
 
 # Retrieve the librarian for a specific library
