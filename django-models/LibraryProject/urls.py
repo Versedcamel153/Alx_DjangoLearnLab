@@ -23,11 +23,6 @@ from relationship_app.librarian_view import librarian_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books/', book_list, name='book-list'),
-    path('add_book/', add_book, name='add_book'),
-    path('edit_book/', edit_book, name='edit_book'),
-    path('delete_book/', delete_book, name='delete_book'),
-    path('library/<int:pk>', LibraryDetailView.as_view(), name='library-detailed-view'),
     path('', include('relationship_app.urls')),
     path('admin/', admin_view, name='admin-view'),
     path('librarian/', librarian_view, name='librarian-view'),
