@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import permission_required, user_passes_test
 from .models import Library
 from .models import Book #did this duplicate import because of checker issues
-from .forms import BookForm
+from .forms import BookForm, ExampleForm
 
 # Create your views here.
 def list_books(request):
