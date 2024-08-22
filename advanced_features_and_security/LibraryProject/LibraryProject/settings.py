@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODELS = [
-    'bookshelf.models.CustomUser'
+    'bookshelf.CustomUser'
 ]
 
 # settings.py
