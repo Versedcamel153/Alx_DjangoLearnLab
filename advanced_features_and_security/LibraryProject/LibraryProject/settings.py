@@ -37,6 +37,11 @@ SECURE_HSTS_SECONDS = 31536000  # One year in seconds
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
 SECURE_HSTS_PRELOAD = True  # Allows preloading of HSTS in browsers
 X_FRAME_OPTIONS = 'DENY'  # Prevent the site from being framed
+SECURE_PROXY_SSL_HEADER = [
+    'HTTP_X_FORWARDED_PROTO',
+    'https',
+    ]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -116,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODELS = [
-    'relationship_app.models.CustomUser'
+    'bookshelf.models.CustomUser'
 ]
 
 # settings.py
