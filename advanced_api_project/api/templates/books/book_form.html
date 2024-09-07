@@ -1,0 +1,31 @@
+<!-- templates/books/book_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Book Form{% endblock %}</title>
+</head>
+<body>
+    <h1>{% block heading %}Book Form{% endblock %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    {% if form.errors %}
+        <div class="errors">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <a href="{% url 'book_list' %}">Back to List</a>
+</body>
+</html>
