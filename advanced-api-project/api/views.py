@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, filters
 from django.urls import reverse_lazy
+from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from django.views.generic import DeleteView, DetailView, CreateView, UpdateView, ListView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
