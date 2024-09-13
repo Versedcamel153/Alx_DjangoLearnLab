@@ -159,8 +159,25 @@ def update_post(request, pk):
     else:
         form = PostForm(instance=blog_post)
     return render(request, 'post_form.html', {'form': form})
+    
+class CommentCreateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/edit_comment.html'
 
-class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        comment = self.get_object()
+        return reverse_lazy('post_detail', kwargs={'pk': comment.post.pk})
+    
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.author
+        
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'blog/edit_comment.html'
