@@ -1,0 +1,24 @@
+<!-- search_results.html -->
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block content %}
+{% load widget_tweaks %}
+    <h1>Search Results</h1>
+    <p>Results for: "{{ query }}"</p>
+    <ul>
+        {% if posts %}
+            {% for post in posts %}
+                <li>
+                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                    <p>{{ post.content|slice:":200" }}...</p>  <!-- Preview content -->
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </ul>
+{% endblock %}

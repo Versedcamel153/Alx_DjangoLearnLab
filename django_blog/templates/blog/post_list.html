@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+{% block search %}
+      <form  class="d-flex" method="get" action="{% url 'search' %}">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ query }}">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+{% endblock %}
+
+{% block content %}
+      
+    
+
+{% for post in posts %}
+<div class="card mb-3" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><a class="link-offset-2 link-underline link-underline-opacity-0" href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h5>
+        <p class="card-text text-start">By: {{ post.author }}</p>
+        {% if user == post.author %}
+            <a class="btn btn-primary" href="{% url 'post_update' post.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'post_delete' post.pk %}">Delete</a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}

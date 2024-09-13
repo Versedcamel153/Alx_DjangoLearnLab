@@ -1,0 +1,20 @@
+<!-- templates/blog/tagged_posts.html -->
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    Posts tagged with "{{ tag.name }}"
+{% endblock %}
+
+{% block content %}
+{% load widget_tweaks %}
+    <h1>Posts tagged with "{{ tag.name }}"</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                <p>{{ post.content|slice:":200" }}...</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'post_list' %}">Back to list</a>
+{% endblock %}

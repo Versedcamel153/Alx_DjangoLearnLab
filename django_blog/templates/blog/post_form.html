@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% load widget_tweaks %}
+<h2>
+    {% if form.instance.pk %}
+        Edit
+    {% else %}
+        Create Post
+    {% endif %}
+</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            {{ form.title| add_class:"form-control"| attr:"id:floatingInput"| attr:"placeholder:Title" }}
+            <label for="floatingInput">Title</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.content| add_class:"form-control"| attr:"id:floatingInput"| attr:"placeholder:Content"|attr:"style:height:100px;" }}
+            <label for="floatingInput">Content</label>
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.tags| add_class:"form-control"| attr:"id:floatingInput"| attr:"placeholder:Tags" }}
+            <label for="floatingInput">Tags</label>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+
+
+{% endblock %}
