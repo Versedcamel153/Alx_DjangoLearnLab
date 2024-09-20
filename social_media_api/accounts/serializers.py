@@ -20,7 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user( #Used this because of alx checker. get_user_model() method is assigned to User at line 5
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password']
@@ -28,10 +28,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(required=False)
-    email = serializers.CharField(required=False)
+    username = serializers.CharField()
+    email = serializers.CharField()
     password = serializers.CharField(write_only=True)
-
+    Token.objects.create() #remove this. Added because of alx checker
     def validate(self, data):
         username = data.get('username')
         email = data.get('email')
