@@ -60,7 +60,7 @@ class FeedView(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         following = user.following.all()
-        return Post.objects.filter(author__in=following).order_by('-created_at')
+        return Post.objects.filter(author__in=following_user).order_by('-created_at') #remove "_user" from "following_user"
 
    
 class LikeViewSet(viewsets.ModelViewSet):
