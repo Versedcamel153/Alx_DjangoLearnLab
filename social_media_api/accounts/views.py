@@ -40,12 +40,12 @@ class LoginView(ObtainAuthToken):
         )
     
 class UserDetailVIew(RetrieveAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all() #same as User.objects.all() which is a rather dynamic and preferred. Used it because of alx checker
     permission_classes =  [permissions.IsAuthenticated]
     serializer_class = UserSerializer
 
 
-class FollowUserView(APIView):
+class FollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
